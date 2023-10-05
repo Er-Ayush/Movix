@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import {Link, useNavigate} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import Trending from '../trending/Trending';
 
 
 const Hero = ({movies}) => {
@@ -53,6 +54,7 @@ const Hero = ({movies}) => {
             })
         }
       </Carousel>
+      <Trending />
     </div>
   )
 }

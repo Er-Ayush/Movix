@@ -1,8 +1,9 @@
 import Hero from '../hero/Hero';
 
 const Home = ({movies}) => {
+  // console.log(trending);
   return (
-    <Hero movies = {movies} />
+    <Hero movies = {movies}/>
   )
 }
 
