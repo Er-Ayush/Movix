@@ -28,4 +28,10 @@ public class MovieController {
         return new ResponseEntity<Optional<Movies>>(movieService.getbyid(imdbId),HttpStatus.OK);
     }
 
+    @GetMapping("/trending/{pageNo}")
+    public String trending(@PathVariable String pageNo){
+        String s=movieService.trending(pageNo);
+        return s;
+    }
+
 }

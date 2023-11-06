@@ -1,2 +1,5 @@
-package com.movix.movies.Common.Models;public class Moviesint {
+package com.movix.movies.Common.Models;
+
+public class Moviesint {
+
 }
