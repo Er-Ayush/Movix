@@ -10,7 +10,9 @@ import Reviews from "./components/reviews/Reviews";
 import NotFound from "./components/notFound/NotFound";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
+import MovieDetail from "./Pages/movieDetail/MovieDetail";
 import Trending from "./components/trending/Trending";
+import UserProfile from "./components/Profile/UserProfile";
 
 function App() {
   const [movies, setMovies] = useState();
@@ -33,10 +35,12 @@ function App() {
       const response = await api.get(`/api/v1/movies/${movieId}`);
 
       const singleMovie = response.data;
+      // console.log(singleMovie)
 
       setMovie(singleMovie);
 
       setReviews(singleMovie.reviewIds);
+      // console.log(singleMovie)
     } catch (error) {
       console.error(error);
     }
@@ -68,7 +72,11 @@ function App() {
           ></Route>
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/trending" element={<Trending />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/movie/:id" element={<MovieDetail />}></Route>
+          <Route path="/profile/:email" element={<UserProfile />}></Route>
+          
         </Route>
       </Routes>
     </div>

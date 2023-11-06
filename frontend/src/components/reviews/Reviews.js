@@ -7,7 +7,7 @@ import ReviewForm from '../reviewForm/ReviewForm';
 import React from 'react'
 
 const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
-
+    // console.log(reviews)
     const revText = useRef();
     let params = useParams();
     const movieId = params.movieId;
@@ -16,37 +16,35 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
         getMovieData(movieId);
     },[])
 
-    const addReview = async (e) =>{
+    const addReview = async (e) => {
         e.preventDefault();
-
+      
         const rev = revText.current;
-
-        try
-        {
-            const response = await api.post("/api/v1/reviews",{reviewBody:rev.value,imdbId:movieId});
-
-            const updatedReviews = [...reviews, {body:rev.value}];
-    
-            rev.value = "";
-    
-            setReviews(updatedReviews);
+        const reviewBody = rev.value.trim(); // Remove leading and trailing whitespace
+      
+        if (reviewBody === "") {
+          // Review is empty, do nothing
+          return;
         }
-        catch(err)
-        {
-            console.error(err);
+      
+        try {
+          const response = await api.post("/api/v1/reviews", {
+            reviewBody: reviewBody,
+            imdbId: movieId,
+          });
+          console.log("user added successfully");
+        } catch (err) {
+          console.error(err);
         }
-        
-
-
-
-    }
+      };
+      
 
   return (
-    <Container>
-        <Row>
+    <Container style={{color:'black'}} >
+        <Row style={{marginLeft:'50%'}}>
             <Col><h3>Reviews</h3></Col>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2" style={{color:'white'}}>
             <Col>
                 <img src={movie?.poster} alt="" />
             </Col>
@@ -65,21 +63,28 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
                         </Row>
                     </>
                 }
+               
+                
                 {
-                    reviews?.map((r) => {
-                        return(
-                            <>
-                                <Row>
-                                    <Col>{r.body}</Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <hr />
-                                    </Col>
-                                </Row>                                
-                            </>
-                        )
-                    })
+                   
+                   reviews?.map((r, index) => {
+                    if (r.body.trim() !== "") {
+                      return (
+                        <React.Fragment key={index}>
+                          <Row>
+                            <Col>{r.body}</Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <hr />
+                            </Col>
+                          </Row>
+                        </React.Fragment>
+                      );
+                    }
+                  })
+                  
+                
                 }
             </Col>
         </Row>

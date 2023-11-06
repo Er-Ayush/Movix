@@ -25,7 +25,7 @@ const Trending = () => {
         try {
             const res = await api.get(`api/v1/movies/trending/${pageNo}`);
             const data = res.data.results;
-            console.log("this is the res" , data);
+            // console.log("this is the res" , data);
             setArr(data);
         } 
         catch (error) {
@@ -45,9 +45,10 @@ const Trending = () => {
     </h2>
     <div className='movie-card-outer'>
     {   
-        arr.map((movie)=>{
-            return <TrendingCard data={movie}/>
-        })
+        arr.map((movie, index) => (
+            <TrendingCard key={index} data={movie} />
+          ))
+          
         
     }
     </div>
@@ -59,7 +60,7 @@ const Trending = () => {
         }
         {   
         
-            pages.map((i,indx)=>{
+            pages.map((i,index)=>{
                 
                     return pageNo !== i ?
                     <div className='page-cont' key={i} onClick={()=>handleClick(i)}>{i}</div>

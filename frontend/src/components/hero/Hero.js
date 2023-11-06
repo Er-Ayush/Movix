@@ -54,7 +54,7 @@ const Hero = ({movies}) => {
             })
         }
       </Carousel>
-      <Trending />
+      
     </div>
   )
 }
