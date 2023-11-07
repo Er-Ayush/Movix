@@ -5,16 +5,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import {Link, useNavigate} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import Trending from '../trending/Trending';
-
+import {useSelector } from 'react-redux';
+import api from "../../api/axiosConfig"
 
 const Hero = ({movies}) => {
-
+    const user =useSelector((state)=>state.user);
+    const isLoggedIn =user.isLoggedIn;
     const navigate = useNavigate();
 
     function reviews(movieId)
     {
         navigate(`/Reviews/${movieId}`);
+    }
+
+    const addFav=async (imdbId)=>{
+        console.log('hi');
+        try {
+            const response =api.post('/api/v1/user/addfav',{
+                imdbId:imdbId,
+                username:user.email,
+            })
+            console.log(done);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
   return (
@@ -45,6 +59,14 @@ const Hero = ({movies}) => {
                                         <div className="movie-review-button-container">
                                             <Button variant ="info" onClick={() => reviews(movie.imdbId)} >Reviews</Button>
                                         </div>
+                                        {
+                                        isLoggedIn ? 
+                                        <div className="movie-fav-button-container">
+                                        <Button  variant ="info" onClick={() => addFav(movie.imdbId)} style={{width:"150px" , marginLeft:"10px"}}>Add to Fav</Button>
+                                         </div>
+
+                                        : null
+                                       }
                                     </div>
                                 </div>
                             </div>

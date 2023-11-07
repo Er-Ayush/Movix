@@ -9,16 +9,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/reducer/Slice";
 
 const Header = () => {
-    const user=useSelector((state) => state.user);
+    const user = useSelector((state) => state.user);
     // const isLoggedIn = user.isLoggedIn;
     const dispatch = useDispatch();
     console.log(user.isLoggedIn);
 
     const handleLogout = () => {
-        
-            dispatch(logout());
-        
-        
+
+        dispatch(logout());
+
+
     };
 
     const navbarStyle = {
@@ -32,7 +32,7 @@ const Header = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg" style={navbarStyle}>
             <Container fluid>
-                <Navbar.Brand href="/" style={{ color: 'red', fontFamily: 'Netflix Sans, Arial, sans-serif', paddingLeft: '25px', paddingRight: '20px' }}>
+                <Navbar.Brand as={Link} to="/" style={{ color: 'red', fontFamily: 'Netflix Sans, Arial, sans-serif', paddingLeft: '25px', paddingRight: '20px' }}>
                     <FontAwesomeIcon icon={faVideoSlash} />Cineflix
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -46,18 +46,18 @@ const Header = () => {
                         {/* <NavLink className="nav-link" to="/watchList" style={redText}>Watch List</NavLink> */}
                         <NavLink className="nav-link" to="/trending" style={redText}>Trending Movies</NavLink>
                     </Nav>
-                   
+
 
                     {user.isLoggedIn ? (
-                            <div>
+                        <div>
 
-                            <Link to={`/profile/${user.email}`} style={{color:'white',paddingRight:'20px'}}>
-                               {user.name}
+                            <Link to={`/profile/${user.email}`} style={{ color: 'white', paddingRight: '20px',textDecoration:'none'}}>
+                                Favourite Movies
                             </Link>
                             <Button variant="outline-info" onClick={handleLogout}>Logout</Button>
                         </div>
-                        
-                        
+
+
                     ) : (
                         <div>
                             <Link to="/login">
