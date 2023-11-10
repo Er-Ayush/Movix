@@ -23,6 +23,7 @@ public class MovieController {
         return new ResponseEntity<List<Movies>>(movieService.allmovies(), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{imdbId}")
     public ResponseEntity<Optional<Movies>> getMovieById(@PathVariable String imdbId){
         return new ResponseEntity<Optional<Movies>>(movieService.getbyid(imdbId),HttpStatus.OK);

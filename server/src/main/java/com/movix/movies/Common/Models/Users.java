@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Document(collection = "Users")
@@ -18,7 +19,7 @@ public class Users {
     private String name;
     private String pass;
 
-    List<String> fav;
+    Set<String> fav;
 
     public String getName() {
 
@@ -45,11 +46,11 @@ public class Users {
         this.pass = pass;
     }
 
-    public List<String> getFav() {
+    public Set<String> getFav() {
         return fav;
     }
 
-    public void setFav(List<String> fav) {
+    public void setFav(Set<String> fav) {
         this.fav = fav;
     }
 
@@ -58,7 +59,7 @@ public class Users {
         this.pass = pass;
     }
 
-    public Users(String username, String pass, List<String> fav) {
+    public Users(String username, String pass, Set<String> fav) {
         this.username = username;
         this.pass = pass;
         this.fav = fav;
